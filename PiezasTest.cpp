@@ -17,4 +17,26 @@ class PiezasTest : public ::testing::Test
 TEST(PiezasTest, sanityCheck)
 {
 	ASSERT_TRUE(true);
-}
+};
+
+TEST(PiezasTest, BOARD_ROWS){
+	ASSERT_EQ(3, BOARD_ROWS);
+};
+
+TEST(PiezasTest, BOARD_COLS){
+	ASSERT_EQ(4, BOARD_COLS);
+};
+/*
+TEST(PiezasTest, dropPiece){
+	Piezas board;
+	ASSERT_EQ(board.dropPiece(2), -1);
+
+};
+
+TEST(PiezasTest, pieceAt){
+	Piezas Board;
+	int column = 2;
+	Board.dropPiece(column);
+	ASSERT_EQ(Board.pieceAt(0,2), Blank);
+};
+*/ 
