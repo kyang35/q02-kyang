@@ -26,10 +26,18 @@ TEST(PiezasTest, BOARD_ROWS){
 TEST(PiezasTest, BOARD_COLS){
 	ASSERT_EQ(4, BOARD_COLS);
 };
-/*
+
+TEST(PiezasTest, reset){
+	Piezas board;
+	board.reset();
+	ASSERT_EQ(board.pieceAt(1, 1), Blank);
+
+};
+
 TEST(PiezasTest, dropPiece){
 	Piezas board;
-	ASSERT_EQ(board.dropPiece(2), -1);
+		
+	ASSERT_EQ(board.dropPiece(2), O);
 
 };
 
@@ -39,4 +47,3 @@ TEST(PiezasTest, pieceAt){
 	Board.dropPiece(column);
 	ASSERT_EQ(Board.pieceAt(0,2), Blank);
 };
-*/ 

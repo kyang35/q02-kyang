@@ -21,12 +21,17 @@
 **/
 
 Piezas::Piezas(){
-
+	/*
 	for(int i = BOARD_ROWS; i > 0; i--){
 		for(int j = 0; j < BOARD_COLS; j++){
 			board[i][j]; 
 		}	
 	}
+	*/	
+	board[BOARD_ROWS][BOARD_COLS];
+	//board[BOARD_ROWS];
+	//board2[BOARD_COLS];
+	
 	turn = X;
 };
 
@@ -38,7 +43,7 @@ void Piezas::reset(){
 	
 	for(int i = BOARD_ROWS; i > 0; i--){
 		for(int j = 0; j < BOARD_COLS; j++){
-			board[i][j] = Blank;
+			board[i][j].add(Blank);
 		}
 	}	
 
@@ -119,21 +124,31 @@ Piece Piezas::pieceAt(int row, int column){
 **/
 Piece Piezas::gameState(){
 	
+	//int X_horizontal;
+	//int O_horizontal;
+	int X_vert;
+	int O_vert;
 	int X_score;
 	int O_score;
-	int X_hold;
-	int O_hold;
-	int i = 0;
 		
-	while(i < BOARD_COLS){
-		if(board[i][0] == X){
-			X_hold = X_hold + 1;
-			i = i + 1;
+	for(int i = 0; i < 3; i++){
+		for(int j = 0; j < 4; j++){
+		
+			if(board[i][j] == X){
+				X_vert = X_vert + 1;
+				if(X_vert > X_score){
+					X_score = X_vert;
+				}
+			}
+			else if(board[i][j] == O){
+				O_vert = O_vert + 1;
+				if(O_vert > O_score){
+					O_score = O_vert;
+				}
+			}
 		}
-		else if(board[i][0] == O){
-			O_hold = O_hold + 1;
-			i = i + 1;
-		}
+		X_vert = 0;
+		O_vert = 0;
 	}	
 };
 
