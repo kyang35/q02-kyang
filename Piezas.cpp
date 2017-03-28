@@ -43,7 +43,7 @@ void Piezas::reset(){
 	
 	for(int i = BOARD_ROWS; i > 0; i--){
 		for(int j = 0; j < BOARD_COLS; j++){
-			board[i][j].add(Blank);
+			board[i][j]=Blank;
 		}
 	}	
 
