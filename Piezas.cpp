@@ -15,18 +15,34 @@
  * dropped in column 2 should take [1,2].
 **/
 
-
 /**
  * Constructor sets an empty board (default 3 rows, 4 columns) and 
  * specifies it is X's turn first
 **/
-Piezas::Piezas();
+
+Piezas::Piezas(){
+
+	for(int i = BOARD_ROWS; i > 0; i--){
+		for(int j = 0; j < BOARD_COLS; j++){
+			board[i][j]; 
+		}	
+	}
+	turn = X;
+};
 
 /**
  * Resets each board location to the Blank Piece value, with a board of the
  * same size as previously specified
 **/
-void Piezas::reset();
+void Piezas::reset(){
+	
+	for(int i = BOARD_ROWS; i > 0; i--){
+		for(int j = 0; j < BOARD_COLS; j++){
+			board[i][j] = Blank;
+		}
+	}	
+
+};
 
 /**
  * Places a piece of the current turn on the board, returns what
@@ -36,14 +52,62 @@ void Piezas::reset();
  * Out of bounds coordinates return the Piece Invalid value
  * Trying to drop a piece where it cannot be placed loses the player's turn
 **/ 
-Piece Piezas::dropPiece(int column);
+Piece Piezas::dropPiece(int column){
+	
+	int i = 0;
+	if(column > 4 || column < 0){
+		if(turn == X){
+			turn = O;
+			return Blank;
+		}
+		else if(turn == O){
+			turn = X;
+			return Blank;
+		}
+	}
+	else{	
+		do{
+			if(board[i][column] == Blank){
+				if(turn == X){
+					board[i][column] = X;
+					turn = O;
+					return X;
+				}
+				else if(turn == O){
+					board[i][column] = O;
+					turn = X;
+					return O;
+				}
+			}
+			else if(board[i][column] != Blank && i < 2){
+				i = i+1;
+			}
+			else{
+				return Invalid;
+					
+			}
+		}while(board[i][column] == Blank);
+	}			
+};
 
 /**
  * Returns what piece is at the provided coordinates, or Blank if there
  * are no pieces there, or Invalid if the coordinates are out of bounds
 **/
-Piece Piezas::pieceAt(int row, int column);
-
+Piece Piezas::pieceAt(int row, int column){
+	if(board[row][column] == X){
+		return X;
+	}
+	else if(board[row][column] == O){
+		return O;
+	}
+	else if(board[row][column] == Blank){
+		return Blank;
+	}
+	else{
+		return Invalid;
+	}
+};
 /**
  * Returns which Piece has won, if there is a winner, Invalid if the game
  * is not over, or Blank if the board is filled and no one has won ("tie").
@@ -53,4 +117,27 @@ Piece Piezas::pieceAt(int row, int column);
  * or horizontally. If both X's and O's have the same max number of pieces in a
  * line, it is a tie.
 **/
-Piece Piezas::gameState();
+Piece Piezas::gameState(){
+	
+	int X_score;
+	int O_score;
+	int X_hold;
+	int O_hold;
+	int i = 0;
+		
+	while(i < BOARD_COLS){
+		if(board[i][0] == X){
+			X_hold = X_hold + 1;
+			i = i + 1;
+		}
+		else if(board[i][0] == O){
+			O_hold = O_hold + 1;
+			i = i + 1;
+		}
+	}	
+};
+
+
+
+
+
